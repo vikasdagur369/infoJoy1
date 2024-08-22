@@ -1,0 +1,138 @@
+.campaign-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .campaign-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .campaign-list {
+    display: flex;
+    align-items: center;
+  }
+  
+  .campaign-list label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .campaign-list select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .campaign-body {
+    display: flex;
+  }
+  
+  .query-section {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin-right: 20px;
+  }
+  
+  .triggers, .filters {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .triggers h4, .filters h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+  
+  ul li span {
+    font-weight: bold;
+  }
+  
+  .results-section {
+    flex: 1;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .export-buttons {
+    margin-bottom: 10px;
+    display: flex;
+  }
+  
+  .export-btn, .custom-export-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-export-btn {
+    background-color: #6c757d;
+  }
+  
+  .export-btn:hover, .custom-export-btn:hover {
+    opacity: 0.9;
+  }
+  
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .results-table th, .results-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .results-table th {
+    background-color: #f4f4f4;
+    font-size: 14px;
+  }
+  
+  .results-table td {
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .no-data {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .results-table input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  

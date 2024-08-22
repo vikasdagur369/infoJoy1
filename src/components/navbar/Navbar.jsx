@@ -15,9 +15,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   };
 
   const handleSignOut = () => {
-    // Add sign-out logic here, like clearing tokens or calling a logout API
     console.log("User signed out");
-    // Optionally navigate to a different route after sign-out
     navigate("/login");
   };
 
@@ -62,7 +60,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 href="#"
                 className={styles.nav_link}
                 onClick={(e) => {
-                  e.preventDefault(); // Prevent the default anchor behavior
+                  e.preventDefault();
                   handleSignOut();
                 }}
               >
