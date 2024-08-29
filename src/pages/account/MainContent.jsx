@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./YourStylesheet.css"; // Import the custom stylesheet
 
-const MainContent = () => {
+const MainContent = ({ sidebarOpen }) => {
   const [campaign, setCampaign] = useState("simran1");
 
   const handleCampaignChange = (e) => {
@@ -9,7 +9,14 @@ const MainContent = () => {
   };
 
   return (
-    <div className="campaign-container">
+    <div
+      className="campaign-container"
+      style={{
+        marginLeft: sidebarOpen ? "250px" : "0",
+        transition: "margin-left 0.3s ease",
+        width: sidebarOpen ? "calc(100% - 250px)" : "100%",
+      }}
+    >
       <div className="campaign-header">
         <div className="campaign-list">
           <label htmlFor="campaignList">Campaign List</label>

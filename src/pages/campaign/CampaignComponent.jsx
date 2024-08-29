@@ -6,8 +6,8 @@ const CampaignComponent = ({ isSidebarOpen }) => {
   return (
     <div
       style={{
-        width: isSidebarOpen ? "calc(100% - 250px)" : "100%",
-        marginLeft: isSidebarOpen ? "250px" : "0",
+        width: isSidebarOpen ? "calc(100% - 250px)" : "calc(100% - 68px)",
+        marginLeft: isSidebarOpen ? "250px" : "68px",
         transition: "margin-left 0.3s ease, width 0.3s ease",
         padding: "20px",
         fontFamily: "Arial, sans-serif",

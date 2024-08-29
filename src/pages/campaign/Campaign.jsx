@@ -4,17 +4,16 @@ import HeaderCampaign from "./HeaderCampaign";
 import CampaignComponent from "./CampaignComponent";
 
 const Campaign = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Function to toggle the sidebar state
   const toggleSidebar = () => {
     setIsSidebarOpen((prevState) => !prevState);
   };
 
   return (
     <>
-      <HeaderCampaign />
       <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <HeaderCampaign sidebarOpen={isSidebarOpen} />
       <CampaignComponent isSidebarOpen={isSidebarOpen} />
     </>
   );
