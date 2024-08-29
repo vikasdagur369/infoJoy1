@@ -2,6 +2,22 @@ import React, { useState } from "react";
 
 const CampaignComponent = ({ isSidebarOpen }) => {
   const [activeTab, setActiveTab] = useState("TRIGGERS");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newCampaignName, setNewCampaignName] = useState("");
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleAddNewCampaign = () => {
+    // Logic for adding a new campaign
+    console.log("New Campaign Name:", newCampaignName);
+    closeModal();
+  };
 
   return (
     <div
@@ -42,10 +58,88 @@ const CampaignComponent = ({ isSidebarOpen }) => {
             borderRadius: "5px",
             cursor: "pointer",
           }}
+          onClick={openModal}
         >
           New Campaign
         </button>
       </div>
+
+      {/* Modal for New Campaign */}
+      {isModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "white",
+              padding: "20px",
+              borderRadius: "5px",
+              width: "300px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "20px",
+              }}
+            >
+              <h2 style={{ margin: 0 }}>New Campaigns</h2>
+              <button
+                onClick={closeModal}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: "18px",
+                  cursor: "pointer",
+                }}
+              >
+                &times;
+              </button>
+            </div>
+            <input
+              type="text"
+              placeholder="Enter Campaign Name"
+              value={newCampaignName}
+              onChange={(e) => setNewCampaignName(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "10px",
+                marginBottom: "10px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+              }}
+            />
+            <button
+              onClick={handleAddNewCampaign}
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                backgroundColor: "#4a5cf5",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                width: "100%",
+              }}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      )}
 
       <div
         style={{
