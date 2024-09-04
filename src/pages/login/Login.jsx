@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("User Logged In Successfully!");
+      window.location.href = "/";
+      toast.success("User logged in Successfully", {
+        position: "top-center",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="login-container">
       <div className="login-box">
@@ -22,12 +42,12 @@ const Login = () => {
         <div className="login-form">
           <div className="signup-link">
             <p>
-              New User? <a href="#">Sign Up</a>
+              New User? <a href="/Signup">Sign Up</a>
             </p>
           </div>
           <h2>Welcome Back!</h2>
           <p>Login to Continue</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">
                 <i className="icon-email"></i>
@@ -36,14 +56,22 @@ const Login = () => {
                 type="email"
                 id="email"
                 placeholder="Email"
-                defaultValue="Simran@infojoy.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                defaultValue=""
               />
             </div>
             <div className="form-group">
               <label htmlFor="password">
                 <i className="icon-password"></i>
               </label>
-              <input type="password" id="password" placeholder="Password" />
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
             </div>
             <div className="form-options">
               <label>
