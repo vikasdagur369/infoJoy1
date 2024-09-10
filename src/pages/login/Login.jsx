@@ -4,24 +4,30 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("User Logged In Successfully!");
-      window.location.href = "/";
       toast.success("User logged in Successfully", {
         position: "top-center",
       });
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
+      toast.error("Login failed. Please check your credentials.", {
+        position: "top-center",
+      });
     }
   };
+
   return (
     <div className="login-container">
       <div className="login-box">
@@ -58,7 +64,7 @@ const Login = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                defaultValue=""
+                required
               />
             </div>
             <div className="form-group">
@@ -71,6 +77,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                required
               />
             </div>
             <div className="form-options">

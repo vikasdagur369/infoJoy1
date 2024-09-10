@@ -39,7 +39,7 @@ function Profile() {
         <hr />
         <div className="logout">
           <img src="https://via.placeholder.com/20" alt="Logout Icon" />
-          <span>Logout</span>
+          <a href="/signup">Logout</a>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -12,14 +13,19 @@ function Signup() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [phone, setPhone] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const user = auth.currentUser;
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
       console.log(user);
-      window.location.href = "/";
+
       if (user) {
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
@@ -28,16 +34,16 @@ function Signup() {
           phone: phone,
         });
       }
-      console.log("user registered successfully !!");
-      toast.success("User registered Successfully !!", {
+      console.log("User registered successfully!");
+      toast.success("User registered Successfully!", {
         position: "top-center",
       });
+      navigate("/dashboard");
     } catch (error) {
       console.log(error.message);
-      toast.error(error.message),
-        {
-          position: "top-center",
-        };
+      toast.error(error.message, {
+        position: "top-center",
+      });
     }
   };
 
@@ -89,7 +95,7 @@ function Signup() {
               Phone<span className="red-asterisk">*</span>
             </label>
             <input
-              type="text"
+              type="tel"
               className="input-field"
               placeholder="Phone"
               onChange={(e) => setPhone(e.target.value)}
@@ -116,9 +122,12 @@ function Signup() {
               required
             />
             <button type="submit" className="submit-button">
-              SignUp
+              Sign Up
             </button>
           </form>
+          <p>
+            Already have an account? <a href="/login">Log In</a>
+          </p>
         </div>
       </div>
     </div>
