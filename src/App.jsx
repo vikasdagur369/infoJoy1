@@ -8,7 +8,6 @@ const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const Campaign = lazy(() => import("./pages/campaign/Campaign"));
 const Account = lazy(() => import("./pages/account/Account"));
 const Login = lazy(() => import("./pages/login/Login"));
-const Signup = lazy(() => import("./pages/signUp/Signup"));
 
 const PrivateRoute = ({ isAuthenticated, children }) => {
   const navigate = useNavigate();
@@ -50,7 +49,6 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
 
           <Route
             path="/dashboard"
