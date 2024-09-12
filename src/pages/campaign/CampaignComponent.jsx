@@ -1,22 +1,66 @@
 import React, { useState } from "react";
 
+const DropdownWithAdd = ({ label, options, value, onChange }) => (
+  <div style={{ marginBottom: "20px" }}>
+    <label style={{ marginBottom: "5px", fontWeight: "bold" }}>{label}</label>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <select
+        style={{
+          flexGrow: 1,
+          padding: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          marginRight: "10px",
+        }}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
+        <option value="">Select {label}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      <button
+        style={{
+          padding: "10px 20px",
+          fontSize: "14px",
+          backgroundColor: "#4a5cf5",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Add
+      </button>
+    </div>
+  </div>
+);
+
 const CampaignComponent = ({ isSidebarOpen }) => {
   const [activeTab, setActiveTab] = useState("TRIGGERS");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newCampaignName, setNewCampaignName] = useState("");
+  const [location, setLocation] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [companySize, setCompanySize] = useState("");
+  const [triggers, setTriggers] = useState([]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleAddNewCampaign = () => {
-    // Logic for adding a new campaign
     console.log("New Campaign Name:", newCampaignName);
     closeModal();
+  };
+
+  const handleAddTrigger = () => {
+    const newTrigger = prompt("Enter a new trigger:");
+    if (newTrigger) {
+      setTriggers([...triggers, newTrigger]);
+    }
   };
 
   return (
@@ -96,7 +140,7 @@ const CampaignComponent = ({ isSidebarOpen }) => {
                 marginBottom: "20px",
               }}
             >
-              <h2 style={{ margin: 0 }}>New Campaigns</h2>
+              <h2 style={{ margin: 0 }}>New Campaign</h2>
               <button
                 onClick={closeModal}
                 style={{
@@ -177,103 +221,102 @@ const CampaignComponent = ({ isSidebarOpen }) => {
 
       {activeTab === "TRIGGERS" ? (
         <div>
-          <label
+          {triggers.length === 0 ? (
+            <p></p>
+          ) : (
+            <ul>
+              {triggers.map((trigger, index) => (
+                <li key={index}>{trigger}</li>
+              ))}
+            </ul>
+          )}
+          <button
+            onClick={handleAddTrigger}
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "20px",
+              padding: "10px 20px",
+              fontSize: "16px",
+              marginBottom: "10px",
+              backgroundColor: "#4a5cf5",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
             }}
           >
-            <input type="checkbox" style={{ marginRight: "10px" }} />
-            <span>Check to get latest data</span>
-          </label>
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ marginBottom: "5px", fontWeight: "bold" }}>
-              CATEGORIES
-            </label>
-            <input
-              type="text"
-              readOnly
-              placeholder="This widget is read-only. If you would like to add or remove an item, please contact support@marketjoy.com"
-              style={{
-                width: "100%",
-                padding: "10px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-                marginBottom: "5px",
-                backgroundColor: "#f7f7f7",
-              }}
-            />
-          </div>
-          {["ENGAGED WITH COMPETITORS", "KEYWORD", "HIRING", "EVENTS"].map(
-            (label, index) => (
-              <div key={index} style={{ marginBottom: "20px" }}>
-                <label style={{ marginBottom: "5px", fontWeight: "bold" }}>
-                  {label}
-                </label>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <input
-                    type="text"
-                    style={{
-                      flexGrow: 1,
-                      padding: "10px",
-                      borderRadius: "5px",
-                      border: "1px solid #ccc",
-                      marginRight: "10px",
-                    }}
-                  />
-                  <button
-                    style={{
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                      backgroundColor: "#4a5cf5",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-            )
-          )}
+            Add Trigger
+          </button>
+
+          {/* Add LOCATION, INDUSTRY, COMPANY SIZE dropdowns here */}
+          <DropdownWithAdd
+            label="CATEGORIES"
+            options={[
+              "study tools",
+              "subscription billing software",
+              "subscription management software",
+              "subscription revenue management software",
+              "supply chain analytic software",
+              "tab management software",
+            ]}
+            value={location}
+            onChange={setLocation}
+          />
+          <DropdownWithAdd
+            label="Engaged with Competitors"
+            options={[
+              "Technology",
+              "Healthcare",
+              "Finance",
+              "Education",
+              "Retail",
+            ]}
+            value={industry}
+            onChange={setIndustry}
+          />
+          <DropdownWithAdd
+            label="KEYWORDS"
+            options={["MONEY", "TECH"]}
+            value={companySize}
+            onChange={setCompanySize}
+          />
+          <DropdownWithAdd
+            label="HIRING"
+            options={["sales", "dev"]}
+            value={companySize}
+            onChange={setCompanySize}
+          />
+          <DropdownWithAdd
+            label="EVENTS"
+            options={[]}
+            value={companySize}
+            onChange={setCompanySize}
+          />
         </div>
       ) : (
         <div>
-          {["LOCATION", "COMPANY SIZE", "INDUSTRY"].map((label, index) => (
-            <div key={index} style={{ marginBottom: "20px" }}>
-              <label style={{ marginBottom: "5px", fontWeight: "bold" }}>
-                {label}
-              </label>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <input
-                  type="text"
-                  style={{
-                    flexGrow: 1,
-                    padding: "10px",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    marginRight: "10px",
-                  }}
-                />
-                <button
-                  style={{
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                    backgroundColor: "#4a5cf5",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-          ))}
+          <DropdownWithAdd
+            label="LOCATION"
+            options={["US", "UK", "IN", "CA", "AU"]}
+            value={location}
+            onChange={setLocation}
+          />
+          <DropdownWithAdd
+            label="INDUSTRY"
+            options={[
+              "Technology",
+              "Healthcare",
+              "Finance",
+              "Education",
+              "Retail",
+            ]}
+            value={industry}
+            onChange={setIndustry}
+          />
+          <DropdownWithAdd
+            label="COMPANY SIZE"
+            options={["1-10", "11-50", "51-200", "201-500", "501+"]}
+            value={companySize}
+            onChange={setCompanySize}
+          />
         </div>
       )}
     </div>
@@ -281,3 +324,4 @@ const CampaignComponent = ({ isSidebarOpen }) => {
 };
 
 export default CampaignComponent;
+``;
