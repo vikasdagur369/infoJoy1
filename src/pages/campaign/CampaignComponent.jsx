@@ -324,4 +324,3 @@ const CampaignComponent = ({ isSidebarOpen }) => {
 };
 
 export default CampaignComponent;
-``;
